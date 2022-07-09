@@ -21,20 +21,34 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import { Menu } from './components/Menu';
+import Target from './pages/Target';
+import Profil from './pages/Profil';
+
+import CrushesContextProvider from './data/CrushesContextProvider';
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-      </IonRouterOutlet>
+      <Menu />
+      <CrushesContextProvider>
+        <IonRouterOutlet id='main'>
+          <Route exact path="/home">
+            <Home />
+          </Route>
+          <Route exact path="/">
+            <Redirect to="/home" />
+          </Route>
+          <Route exact path="/target">
+            <Target />
+          </Route>
+          <Route exact path="/profil">
+            <Profil />
+          </Route>
+        </IonRouterOutlet>
+      </CrushesContextProvider>
     </IonReactRouter>
   </IonApp>
 );
